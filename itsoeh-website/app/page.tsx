@@ -15,7 +15,7 @@ export default function Home() {
     <div className="relative overflow-hidden">
       {/* Hero Section con fondo de degradado */}
       <div className="relative bg-gradient-to-b from-primary/10 to-background pt-16 pb-20 lg:pt-24 lg:pb-28">
-        <div className="absolute inset-0 bg-[url('/placeholder.svg?height=1080&width=1920')] bg-cover bg-center opacity-10"></div>
+        <div className="absolute inset-0 bg-[url('/images.jpg?height=1080&width=1920')] bg-cover bg-center opacity-10"></div>
         <div className="container px-4 relative">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">

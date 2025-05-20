@@ -1,12 +1,19 @@
 "use client"
 
 import Link from "next/link"
+import { ReactNode } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { BriefcaseIcon, GraduationCapIcon, PhoneIcon } from "lucide-react"
 
-// Simulamos componentes de framer-motion
-const MotionDiv = ({ children, ...props }) => <div {...props}>{children}</div>
+type MotionDivProps = {
+  children: ReactNode
+  [key: string]: any
+}
+
+const MotionDiv = ({ children, ...props }: MotionDivProps) => (
+  <div {...props}>{children}</div>
+)
 
 export default function EgresadosPage() {
   const features = [
@@ -14,8 +21,7 @@ export default function EgresadosPage() {
       icon: <BriefcaseIcon className="h-12 w-12 mb-2 text-primary" />,
       title: "Bolsa de Empleo",
       description: "Accede a ofertas laborales exclusivas para egresados del ITSOEH",
-      content:
-        "Conectamos a nuestros egresados con empresas que buscan profesionales con tu perfil y formación académica.",
+      content: "Conectamos a nuestros egresados con empresas que buscan profesionales con tu perfil y formación académica.",
       href: "/egresados/bolsa-empleo",
       buttonText: "Ver Ofertas",
       delay: 0.1,
@@ -42,7 +48,7 @@ export default function EgresadosPage() {
 
   return (
     <div className="relative overflow-hidden">
-      {/* Hero Section con fondo decorativo */}
+      {/* Hero Section */}
       <div className="relative bg-gradient-to-b from-primary/10 via-background to-background pt-12 pb-20">
         <div className="absolute inset-0 bg-[url('/placeholder.svg?height=900&width=1600')] bg-cover bg-center opacity-5"></div>
         <div className="absolute inset-0 bg-grid-pattern"></div>
@@ -61,11 +67,20 @@ export default function EgresadosPage() {
               Bienvenido al espacio dedicado a nuestros egresados. Aquí encontrarás recursos exclusivos para continuar
               tu desarrollo profesional y mantener el vínculo con tu alma mater.
             </p>
+
+            {/* Botón para volver al inicio */}
+            <div className="mt-6">
+              <Link href="/">
+                <Button variant="outline" className="text-sm">
+                  ← Regresar al inicio
+                </Button>
+              </Link>
+            </div>
           </MotionDiv>
         </div>
       </div>
 
-      {/* Features Section */}
+      {/* Features */}
       <div className="container px-4 py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
           {features.map((feature, index) => (
@@ -101,7 +116,7 @@ export default function EgresadosPage() {
         </div>
       </div>
 
-      {/* Testimonials Section */}
+      {/* Testimonials */}
       <div className="bg-muted/50 py-16">
         <div className="container px-4">
           <MotionDiv
@@ -119,22 +134,19 @@ export default function EgresadosPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
-                quote:
-                  "Gracias a la bolsa de trabajo del ITSOEH conseguí mi primer empleo. El apoyo que recibí como egresado fue fundamental para iniciar mi carrera profesional.",
+                quote: "Gracias a la bolsa de trabajo del ITSOEH conseguí mi primer empleo...",
                 author: "Ana Martínez",
                 role: "Ingeniera en Sistemas, Generación 2020",
                 delay: 0.1,
               },
               {
-                quote:
-                  "Los cursos de educación continua me han permitido mantenerme actualizado en mi campo. Las certificaciones obtenidas han sido clave para mi crecimiento laboral.",
+                quote: "Los cursos de educación continua me han permitido mantenerme actualizado...",
                 author: "Carlos Rodríguez",
                 role: "Ingeniero Industrial, Generación 2019",
                 delay: 0.2,
               },
               {
-                quote:
-                  "La red de contactos que he formado a través de los eventos para egresados ha sido invaluable. El ITSOEH sigue siendo parte importante de mi vida profesional.",
+                quote: "La red de contactos que he formado a través de los eventos para egresados...",
                 author: "Laura Sánchez",
                 role: "Ingeniera en Gestión Empresarial, Generación 2021",
                 delay: 0.3,

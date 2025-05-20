@@ -43,8 +43,7 @@ export default function ContactoPage() {
                 <Tabs defaultValue="mensaje" className="w-full">
                   <TabsList className="grid w-full grid-cols-3 mb-6">
                     <TabsTrigger value="mensaje">Mensaje</TabsTrigger>
-                    <TabsTrigger value="agenda">Agendar cita</TabsTrigger>
-                    <TabsTrigger value="documentos">Solicitar documentos</TabsTrigger>
+                
                   </TabsList>
 
                   <TabsContent value="mensaje" className="mt-0">
@@ -90,25 +89,6 @@ export default function ContactoPage() {
                         </div>
                       </div>
 
-                      <div className="space-y-2">
-                        <Label htmlFor="carrera" className="text-sm font-medium">
-                          Carrera
-                        </Label>
-                        <Select>
-                          <SelectTrigger id="carrera">
-                            <SelectValue placeholder="Selecciona tu carrera" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="ing-sistemas">Ingeniería en Sistemas Computacionales</SelectItem>
-                            <SelectItem value="ing-industrial">Ingeniería Industrial</SelectItem>
-                            <SelectItem value="ing-electromecanica">Ingeniería Electromecánica</SelectItem>
-                            <SelectItem value="ing-gestion">Ingeniería en Gestión Empresarial</SelectItem>
-                            <SelectItem value="ing-logistica">Ingeniería en Logística</SelectItem>
-                            <SelectItem value="ing-mecatronica">Ingeniería Mecatrónica</SelectItem>
-                            <SelectItem value="otra">Otra</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
 
                       <div className="space-y-2">
                         <Label htmlFor="asunto" className="text-sm font-medium">
@@ -139,113 +119,7 @@ export default function ContactoPage() {
                         Enviar mensaje
                       </Button>
                     </form>
-                  </TabsContent>
-
-                  <TabsContent value="agenda" className="mt-0">
-                    <div className="space-y-4">
-                      <p className="text-muted-foreground mb-4">
-                        Agenda una cita con nuestro departamento de seguimiento a egresados para atender tus necesidades
-                        específicas.
-                      </p>
-
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                          <Label htmlFor="fecha" className="text-sm font-medium">
-                            Fecha preferida
-                          </Label>
-                          <Input id="fecha" type="date" />
-                        </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="hora" className="text-sm font-medium">
-                            Hora preferida
-                          </Label>
-                          <Input id="hora" type="time" />
-                        </div>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="tipo-cita" className="text-sm font-medium">
-                          Tipo de cita
-                        </Label>
-                        <Select>
-                          <SelectTrigger id="tipo-cita">
-                            <SelectValue placeholder="Selecciona el tipo de cita" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="presencial">Presencial</SelectItem>
-                            <SelectItem value="virtual">Virtual (Videollamada)</SelectItem>
-                            <SelectItem value="telefonica">Telefónica</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="motivo" className="text-sm font-medium">
-                          Motivo de la cita
-                        </Label>
-                        <Textarea id="motivo" placeholder="Describe brevemente el motivo de tu cita" rows={3} />
-                      </div>
-
-                      <Button type="submit" className="w-full" size="lg">
-                        Solicitar cita
-                      </Button>
-                    </div>
-                  </TabsContent>
-
-                  <TabsContent value="documentos" className="mt-0">
-                    <div className="space-y-4">
-                      <p className="text-muted-foreground mb-4">
-                        Solicita documentos oficiales como constancias, credenciales de egresado, o verificación de
-                        estudios.
-                      </p>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="tipo-documento" className="text-sm font-medium">
-                          Tipo de documento
-                        </Label>
-                        <Select>
-                          <SelectTrigger id="tipo-documento">
-                            <SelectValue placeholder="Selecciona el tipo de documento" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="constancia">Constancia de estudios</SelectItem>
-                            <SelectItem value="credencial">Credencial de egresado</SelectItem>
-                            <SelectItem value="verificacion">Verificación de estudios</SelectItem>
-                            <SelectItem value="carta">Carta de recomendación</SelectItem>
-                            <SelectItem value="otro-doc">Otro documento</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="detalles" className="text-sm font-medium">
-                          Detalles adicionales
-                        </Label>
-                        <Textarea
-                          id="detalles"
-                          placeholder="Proporciona cualquier detalle adicional sobre tu solicitud"
-                          rows={3}
-                        />
-                      </div>
-
-                      <div className="bg-muted/50 p-4 rounded-lg mb-4">
-                        <div className="flex items-start gap-3">
-                          <CheckCircleIcon className="h-5 w-5 text-primary mt-0.5" />
-                          <div>
-                            <p className="font-medium text-sm">Información importante</p>
-                            <p className="text-sm text-muted-foreground">
-                              El tiempo de respuesta para documentos oficiales es de 3 a 5 días hábiles. Algunos
-                              documentos pueden requerir el pago de una cuota administrativa.
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-
-                      <Button type="submit" className="w-full" size="lg">
-                        Solicitar documento
-                      </Button>
-                    </div>
-                  </TabsContent>
+                  </TabsContent>  
                 </Tabs>
               </CardContent>
             </Card>
@@ -280,18 +154,19 @@ export default function ContactoPage() {
                     </div>
                   </div>
 
-                  <div className="flex items-start space-x-3 p-3 bg-muted/40 rounded-lg">
-                    <MapPinIcon className="h-5 w-5 mt-0.5 text-primary" />
-                    <div>
-                      <p className="font-medium">Dirección</p>
-                      <p className="text-muted-foreground">
-                        Paseo del Agrarismo 2000, Carr. Mixquiahuala-Tula km 2.5, Mixquiahuala de Juárez, Hidalgo, C.P.
-                        42700
-                      </p>
+                 <div className="flex flex-col space-y-3 p-3 bg-muted/40 rounded-lg">
+                    <div className="flex items-start space-x-3">
+                      <MapPinIcon className="h-5 w-5 mt-0.5 text-primary" />
+                      <div>
+                        <p className="font-medium">Dirección</p>
+                        <p className="text-muted-foreground">
+                          Paseo del Agrarismo 2000, Carr. Mixquiahuala-Tula km 2.5, Mixquiahuala de Juárez, Hidalgo, C.P. 42700
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
 
+                </div>
                 <div className="p-3 bg-muted/40 rounded-lg">
                   <div className="flex items-start space-x-3">
                     <Clock className="h-5 w-5 mt-0.5 text-primary" />
@@ -421,7 +296,6 @@ export default function ContactoPage() {
               </CardContent>
             </Card>
 
-            {/* Mapa de ubicación */}
             <Card className="border-primary/10 overflow-hidden shadow-sm">
               <CardHeader className="bg-primary/5 border-b border-primary/10 pb-3">
                 <CardTitle className="text-sm flex items-center gap-2">
@@ -431,11 +305,17 @@ export default function ContactoPage() {
               </CardHeader>
               <CardContent className="p-0">
                 <div className="h-[250px] w-full bg-muted relative overflow-hidden">
-                  <img
-                    src="/placeholder.svg?height=500&width=800"
-                    alt="Mapa de ubicación del ITSOEH"
-                    className="w-full h-full object-cover"
-                  />
+                  <iframe
+                    title="Ubicación ITSOEH"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3761.251405707109!2d-99.2204159!3d20.2266915!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d24e1a38c7e5cf%3A0x27b82a14a76f8e9!2sITSOEH!5e0!3m2!1ses-419!2smx!4v1683062120410!5m2!1ses-419!2smx"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    className="absolute top-0 left-0 w-full h-full"
+                  ></iframe>
+
                   <div className="absolute bottom-0 left-0 right-0 bg-background/80 backdrop-blur-sm p-3">
                     <p className="text-xs md:text-sm font-medium">
                       Paseo del Agrarismo 2000, Carr. Mixquiahuala-Tula km 2.5, Mixquiahuala de Juárez, Hidalgo
@@ -444,6 +324,7 @@ export default function ContactoPage() {
                 </div>
               </CardContent>
             </Card>
+
 
             {/* FAQ */}
             <Card className="border-primary/10 overflow-hidden shadow-sm">

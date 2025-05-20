@@ -11,13 +11,38 @@ import {
   BuildingIcon,
   SearchIcon,
   BriefcaseIcon,
-  FilterIcon,
   BookmarkIcon,
 } from "lucide-react"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { Label } from "@/components/ui/label"
 
-// Datos de ejemplo para las ofertas de empleo
-const jobOffers = [
+interface JobOffer {
+  id: number
+  title: string
+  company: string
+  logo: string
+  location: string
+  type: string
+  date: string
+  description: string
+  requirements: string[]
+  benefits: string[]
+  exclusive: boolean
+  featured: boolean
+  salary: string
+  url: string
+}
+
+const jobOffers: JobOffer[] = [
   {
     id: 1,
     title: "Ingeniero de Software",
@@ -37,115 +62,184 @@ const jobOffers = [
     exclusive: true,
     featured: true,
     salary: "$20,000 - $30,000 MXN mensuales",
+    url: "https://empresa.com/empleo/ingeniero-software"
   },
   {
     id: 2,
-    title: "Analista de Datos",
-    company: "Grupo Financiero Hidalgo",
+    title: "Diseñador UX/UI",
+    company: "Creativa Studio",
     logo: "/placeholder.svg?height=80&width=80",
-    location: "Ciudad de México (Remoto)",
-    type: "Tiempo completo",
-    date: "12 de mayo, 2025",
-    description:
-      "Análisis de grandes volúmenes de datos para identificar tendencias y generar informes para la toma de decisiones.",
-    requirements: [
-      "Licenciatura en Ingeniería Industrial, Sistemas o afín",
-      "Experiencia en análisis de datos",
-      "Conocimientos de SQL y Python",
-    ],
-    benefits: [
-      "Bono por desempeño",
-      "Seguro de gastos médicos mayores",
-      "Trabajo 100% remoto",
-      "Oportunidades de capacitación",
-    ],
-    exclusive: true,
-    featured: false,
-    salary: "$25,000 - $35,000 MXN mensuales",
+    location: "Guadalajara, Jalisco",
+    type: "Medio tiempo",
+    date: "18 de mayo, 2025",
+    description: "Diseña experiencias de usuario intuitivas y visualmente atractivas para productos digitales.",
+    requirements: ["Figma", "Adobe XD", "Experiencia en diseño web"],
+    benefits: ["Horario flexible", "Ambiente creativo"],
+    exclusive: false,
+    featured: true,
+    salary: "$12,000 - $18,000 MXN mensuales",
+    url: "https://creativa.com/empleo/disenador-ux-ui"
   },
   {
     id: 3,
-    title: "Ingeniero Industrial",
-    company: "Manufacturas del Centro",
+    title: "Analista de Datos",
+    company: "DataCorp",
     logo: "/placeholder.svg?height=80&width=80",
-    location: "Mixquiahuala, Hidalgo",
+    location: "Monterrey, Nuevo León",
     type: "Tiempo completo",
-    date: "10 de mayo, 2025",
-    description:
-      "Optimización de procesos de producción, control de calidad y mejora continua en planta de manufactura.",
-    requirements: [
-      "Licenciatura en Ingeniería Industrial",
-      "1+ año de experiencia",
-      "Conocimientos en Lean Manufacturing",
-    ],
-    benefits: ["Transporte empresarial", "Comedor subsidiado", "Prestaciones superiores a la ley"],
-    exclusive: false,
+    date: "17 de mayo, 2025",
+    description: "Analiza datos para apoyar decisiones estratégicas del negocio.",
+    requirements: ["SQL", "Excel", "Power BI"],
+    benefits: ["Prestaciones superiores", "Trabajo híbrido"],
+    exclusive: true,
     featured: false,
-    salary: "$18,000 - $25,000 MXN mensuales",
+    salary: "$22,000 - $28,000 MXN mensuales",
+    url: "https://datacorp.mx/empleo/analista-datos"
   },
   {
     id: 4,
-    title: "Especialista en Marketing Digital",
-    company: "Agencia Creativa Digital",
+    title: "Soporte Técnico",
+    company: "Soluciones TI",
     logo: "/placeholder.svg?height=80&width=80",
-    location: "Pachuca, Hidalgo (Híbrido)",
+    location: "Toluca, Estado de México",
     type: "Tiempo completo",
-    date: "8 de mayo, 2025",
-    description: "Desarrollo e implementación de estrategias de marketing digital para empresas de diversos sectores.",
-    requirements: [
-      "Licenciatura en Marketing, Comunicación o afín",
-      "Experiencia en gestión de redes sociales y publicidad digital",
-      "Conocimientos de SEO, SEM y analítica web",
-    ],
-    benefits: ["Horario flexible", "Capacitación constante", "Bonos por rendimiento", "Oficina con áreas recreativas"],
-    exclusive: true,
+    date: "16 de mayo, 2025",
+    description: "Brinda soporte técnico a usuarios internos y externos.",
+    requirements: ["Conocimiento en redes", "Atención a clientes", "Diagnóstico de hardware"],
+    benefits: ["Capacitación constante", "Bono por desempeño"],
+    exclusive: false,
     featured: true,
-    salary: "$15,000 - $22,000 MXN mensuales",
+    salary: "$10,000 - $14,000 MXN mensuales",
+    url: "https://solucionesti.mx/empleo/soporte-tecnico"
   },
   {
     id: 5,
-    title: "Ingeniero Mecatrónico",
-    company: "Soluciones Automatizadas S.A.",
+    title: "Administrador de Sistemas",
+    company: "Infraestructura IT",
     logo: "/placeholder.svg?height=80&width=80",
-    location: "Tula, Hidalgo",
+    location: "Querétaro, Querétaro",
     type: "Tiempo completo",
-    date: "5 de mayo, 2025",
-    description: "Diseño y mantenimiento de sistemas automatizados para líneas de producción industrial.",
-    requirements: [
-      "Licenciatura en Ingeniería Mecatrónica",
-      "2+ años de experiencia en automatización industrial",
-      "Conocimientos de PLC, HMI y sistemas SCADA",
-    ],
-    benefits: [
-      "Prestaciones superiores a la ley",
-      "Oportunidades de viajes técnicos",
-      "Plan de carrera",
-      "Seguro de vida",
-    ],
+    date: "19 de mayo, 2025",
+    description: "Gestiona y mantiene servidores y redes internas.",
+    requirements: ["Linux", "Windows Server", "Virtualización"],
+    benefits: ["Seguro de vida", "Plan de carrera"],
+    exclusive: true,
+    featured: false,
+    salary: "$25,000 - $32,000 MXN mensuales",
+    url: "https://infraestruc.com/empleo/admin-sistemas"
+  },
+  {
+    id: 6,
+    title: "Desarrollador Backend",
+    company: "DevSolutions",
+    logo: "/placeholder.svg?height=80&width=80",
+    location: "CDMX",
+    type: "Proyecto",
+    date: "19 de mayo, 2025",
+    description: "Desarrolla microservicios y APIs escalables usando Node.js.",
+    requirements: ["Node.js", "MongoDB", "Docker"],
+    benefits: ["Trabajo remoto", "Pago por proyecto"],
+    exclusive: false,
+    featured: true,
+    salary: "$20,000 MXN por proyecto",
+    url: "https://devsolutions.dev/empleo/backend-node"
+  },
+  {
+    id: 7,
+    title: "Community Manager",
+    company: "Agencia Viral",
+    logo: "/placeholder.svg?height=80&width=80",
+    location: "León, Guanajuato",
+    type: "Medio tiempo",
+    date: "14 de mayo, 2025",
+    description: "Gestión de redes sociales y campañas digitales.",
+    requirements: ["Redacción", "Canva", "Estrategia de contenido"],
+    benefits: ["Trabajo desde casa", "Bonos de rendimiento"],
     exclusive: false,
     featured: false,
-    salary: "$22,000 - $32,000 MXN mensuales",
+    salary: "$8,000 - $12,000 MXN mensuales",
+    url: "https://viral.agency/empleo/community"
   },
+  {
+    id: 8,
+    title: "Tester QA",
+    company: "ControlSoft",
+    logo: "/placeholder.svg?height=80&width=80",
+    location: "San Luis Potosí",
+    type: "Tiempo completo",
+    date: "15 de mayo, 2025",
+    description: "Realiza pruebas funcionales y reporta errores en software en desarrollo.",
+    requirements: ["Pruebas manuales", "Metodologías ágiles", "JIRA"],
+    benefits: ["Prestaciones de ley", "Home office parcial"],
+    exclusive: false,
+    featured: true,
+    salary: "$18,000 - $24,000 MXN mensuales",
+    url: "https://controlsoft.io/empleo/tester-qa"
+  },
+  {
+    id: 9,
+    title: "Project Manager Jr.",
+    company: "PM Group",
+    logo: "/placeholder.svg?height=80&width=80",
+    location: "CDMX",
+    type: "Prácticas",
+    date: "13 de mayo, 2025",
+    description: "Apoyo en gestión de proyectos tecnológicos.",
+    requirements: ["Organización", "Comunicación", "Office"],
+    benefits: ["Constancia de prácticas", "Oportunidad de contratación"],
+    exclusive: true,
+    featured: false,
+    salary: "$5,000 MXN mensuales",
+    url: "https://pmgroup.mx/empleo/pm-jr"
+  },
+  {
+    id: 10,
+    title: "Ingeniero DevOps",
+    company: "CloudOps",
+    logo: "/placeholder.svg?height=80&width=80",
+    location: "Remoto",
+    type: "Tiempo completo",
+    date: "18 de mayo, 2025",
+    description: "Automatiza despliegues y mejora procesos de CI/CD.",
+    requirements: ["GitHub Actions", "Docker", "AWS"],
+    benefits: ["Trabajo 100% remoto", "Salario competitivo"],
+    exclusive: true,
+    featured: true,
+    salary: "$30,000 - $38,000 MXN mensuales",
+    url: "https://cloudops.dev/empleo/devops"
+  },
+  {
+    id: 11,
+    title: "Desarrollador Full Stack",
+    company: "FullTech MX",
+    logo: "/placeholder.svg?height=80&width=80",
+    location: "Aguascalientes",
+    type: "Tiempo completo",
+    date: "19 de mayo, 2025",
+    description: "Participa en el desarrollo de plataformas web de principio a fin.",
+    requirements: ["React", "Node.js", "MySQL"],
+    benefits: ["Sueldo competitivo", "Prestaciones de ley", "Clases de inglés"],
+    exclusive: false,
+    featured: true,
+    salary: "$25,000 - $35,000 MXN mensuales",
+    url: "https://fulltechmx.com/empleo/fullstack"
+  }
 ]
 
 export default function BolsaEmpleoPage() {
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedType, setSelectedType] = useState("all")
   const [onlyExclusive, setOnlyExclusive] = useState(false)
+  const [cvDialogOpen, setCvDialogOpen] = useState(false)
 
-  // Filtrar ofertas
   const filteredJobs = jobOffers.filter((job) => {
-    // Filtro de búsqueda
     const matchesSearch =
       searchTerm === "" ||
       job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       job.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
       job.description.toLowerCase().includes(searchTerm.toLowerCase())
 
-    // Filtro por tipo
     const matchesType = selectedType === "all" || job.type.includes(selectedType)
-
-    // Filtro por exclusividad
     const matchesExclusive = !onlyExclusive || job.exclusive
 
     return matchesSearch && matchesType && matchesExclusive
@@ -154,24 +248,20 @@ export default function BolsaEmpleoPage() {
   return (
     <div className="bg-gradient-to-b from-primary/5 to-background min-h-screen">
       <div className="container px-4 py-12">
-        {/* Hero section */}
         <section className="mb-12 text-center relative rounded-2xl overflow-hidden">
           <div className="bg-gradient-to-r from-primary/20 to-primary/5 rounded-2xl p-10 relative overflow-hidden">
-            <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
             <div className="relative z-10">
               <BriefcaseIcon className="h-16 w-16 text-primary mx-auto mb-6 opacity-80" />
               <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
                 Bolsa de Empleo para Egresados
               </h1>
               <p className="text-xl mb-8 max-w-2xl mx-auto text-muted-foreground">
-                Accede a ofertas laborales exclusivas y oportunidades profesionales seleccionadas para la comunidad de
-                egresados del ITSOEH.
+                Accede a ofertas laborales exclusivas y oportunidades profesionales seleccionadas para la comunidad de egresados del ITSOEH.
               </p>
             </div>
           </div>
         </section>
 
-        {/* Filters */}
         <section className="mb-8 p-6 bg-card rounded-xl shadow-sm border">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="relative flex-grow">
@@ -210,134 +300,66 @@ export default function BolsaEmpleoPage() {
             <div className="text-sm text-muted-foreground">
               Mostrando {filteredJobs.length} de {jobOffers.length} ofertas disponibles
             </div>
-            <div className="flex gap-2">
-              <Button variant="outline" size="sm" className="hidden md:flex gap-2">
-                <FilterIcon className="h-4 w-4" /> Más filtros
-              </Button>
-              <Button size="sm" className="gap-2">
-                <BookmarkIcon className="h-4 w-4" /> Registrar mi CV
-              </Button>
-            </div>
+            {/* Dialog para registrar CV */}
+            <Dialog open={cvDialogOpen} onOpenChange={setCvDialogOpen}>
+              <DialogTrigger asChild>
+                <Button size="sm" className="gap-2">
+                  <BookmarkIcon className="h-4 w-4" /> Registrar mi CV
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Registrar mi CV</DialogTitle>
+                  <DialogDescription>
+                    Sube tu currículum para que las empresas puedan encontrarte.
+                  </DialogDescription>
+                </DialogHeader>
+                <div className="space-y-4">
+                  <Label>Nombre completo</Label>
+                  <Input placeholder="Ingresa tu nombre" />
+                  <Label>Correo electrónico</Label>
+                  <Input type="email" placeholder="tucorreo@ejemplo.com" />
+                  <Label>Sube tu CV (PDF)</Label>
+                  <Input type="file" accept=".pdf" />
+                </div>
+                <DialogFooter>
+                  <Button onClick={() => setCvDialogOpen(false)}>Enviar</Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
           </div>
         </section>
 
-        {/* Job listings */}
         <div className="space-y-6">
           {filteredJobs.map((job) => (
-            <Card
-              key={job.id}
-              className={`overflow-hidden transition-all duration-300 hover:shadow-md ${
-                job.featured ? "border-primary/30 bg-primary/5" : ""
-              }`}
-            >
-              <CardHeader className="pb-2">
-                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-                  <div className="flex gap-4 items-start">
-                    <div className="hidden md:block">
-                      <div className="w-16 h-16 rounded-md overflow-hidden bg-muted">
-                        <img
-                          src={job.logo || "/placeholder.svg"}
-                          alt={job.company}
-                          className="w-full h-full object-contain p-2"
-                        />
-                      </div>
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <CardTitle className="text-2xl">{job.title}</CardTitle>
-                        {job.featured && <Badge className="bg-amber-500/90 hover:bg-amber-500">Destacada</Badge>}
-                        {job.exclusive && (
-                          <Badge className="bg-primary hover:bg-primary/90">Exclusiva para egresados</Badge>
-                        )}
-                      </div>
-                      <CardDescription className="text-lg flex items-center mt-1">
-                        <BuildingIcon className="h-4 w-4 mr-1" /> {job.company}
-                      </CardDescription>
-                    </div>
-                  </div>
-                  <div className="flex flex-wrap gap-3">
-                    <Badge variant="outline" className="px-3 py-1 text-sm">
-                      {job.type}
-                    </Badge>
-                    <div className="text-sm font-medium text-primary bg-primary/10 px-3 py-1 rounded-full">
-                      {job.salary}
-                    </div>
-                  </div>
-                </div>
+            <Card key={job.id}>
+              <CardHeader>
+                <CardTitle>{job.title}</CardTitle>
+                <CardDescription>{job.company}</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="flex flex-wrap gap-4 mb-4 text-sm">
-                  <div className="flex items-center text-muted-foreground">
-                    <MapPinIcon className="h-4 w-4 mr-1" /> {job.location}
-                  </div>
-                  <div className="flex items-center text-muted-foreground">
-                    <CalendarIcon className="h-4 w-4 mr-1" /> Publicada: {job.date}
-                  </div>
-                </div>
-
-                <p className="mb-4">{job.description}</p>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-                  <div>
-                    <h4 className="font-semibold mb-2 flex items-center">
-                      <span className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center mr-2 text-primary">
-                        1
-                      </span>
-                      Requisitos:
-                    </h4>
-                    <ul className="list-disc pl-8 space-y-1 text-muted-foreground">
-                      {job.requirements.map((req, index) => (
-                        <li key={index}>{req}</li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div>
-                    <h4 className="font-semibold mb-2 flex items-center">
-                      <span className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center mr-2 text-primary">
-                        2
-                      </span>
-                      Beneficios:
-                    </h4>
-                    <ul className="list-disc pl-8 space-y-1 text-muted-foreground">
-                      {job.benefits.map((benefit, index) => (
-                        <li key={index}>{benefit}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
+                <p>{job.description}</p>
+                <p className="text-sm text-muted-foreground mt-2">{job.location}</p>
               </CardContent>
-              <CardFooter className="bg-muted/50 flex justify-end gap-2 p-4">
-                <Button variant="outline" className="gap-1">
-                  <BookmarkIcon className="h-4 w-4" /> Guardar
-                </Button>
-                <Button className="gap-1">
-                  <BriefcaseIcon className="h-4 w-4" /> Aplicar ahora
-                </Button>
+              <CardFooter className="justify-end gap-2">
+                <a href={job.url} target="_blank" rel="noopener noreferrer">
+                  <Button className="gap-1">
+                    <BriefcaseIcon className="h-4 w-4" /> Aplicar ahora
+                  </Button>
+                </a>
               </CardFooter>
             </Card>
           ))}
 
           {filteredJobs.length === 0 && (
-            <div className="text-center py-12">
-              <div className="bg-muted/50 inline-block p-4 rounded-full mb-4">
-                <SearchIcon className="h-8 w-8 text-muted-foreground" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">No se encontraron ofertas</h3>
-              <p className="text-muted-foreground max-w-md mx-auto">
-                No hemos encontrado ofertas que coincidan con tus criterios de búsqueda. Intenta con otros términos o
-                filtros.
-              </p>
-              <Button
-                className="mt-4"
-                onClick={() => {
-                  setSearchTerm("")
-                  setSelectedType("all")
-                  setOnlyExclusive(false)
-                }}
-              >
-                Limpiar filtros
-              </Button>
+            <div className="text-center py-12 text-muted-foreground">
+              <SearchIcon className="h-8 w-8 mx-auto mb-4" />
+              No se encontraron ofertas con esos criterios.
+              <Button onClick={() => {
+                setSearchTerm("")
+                setSelectedType("all")
+                setOnlyExclusive(false)
+              }} className="mt-4">Limpiar filtros</Button>
             </div>
           )}
         </div>
