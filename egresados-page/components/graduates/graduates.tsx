@@ -6,7 +6,7 @@ import { Testimonials } from "./testimonials"
 import { Achievements } from "./achievements"
 import { ContactForm } from "./contact-form"
 import { Button } from "@/components/ui/button"
-import { ChevronDown } from "lucide-react"
+import { JobBoard } from "./job-board"
 
 export function Graduates() {
   const [activeSection, setActiveSection] = useState<string>("gallery")
@@ -21,19 +21,6 @@ export function Graduates() {
             <p className="text-xl md:text-2xl max-w-3xl mx-auto opacity-90">
               Descubre las historias de éxito de quienes formaron parte de nuestra institución
             </p>
-          </div>
-          <div className="flex justify-center mt-10">
-            <Button
-              variant="outline"
-              className="text-white border-white hover:bg-white/10 group"
-              onClick={() => {
-                const element = document.getElementById("content")
-                element?.scrollIntoView({ behavior: "smooth" })
-              }}
-            >
-              Explorar
-              <ChevronDown className="ml-2 h-4 w-4 group-hover:translate-y-1 transition-transform" />
-            </Button>
           </div>
         </div>
         <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent"></div>
@@ -65,6 +52,13 @@ export function Graduates() {
               Logros Destacados
             </Button>
             <Button
+              variant={activeSection === "jobs" ? "default" : "ghost"}
+              onClick={() => setActiveSection("jobs")}
+              className="flex-shrink-0"
+            >
+              Bolsa de Trabajo
+            </Button>
+            <Button
               variant={activeSection === "contact" ? "default" : "ghost"}
               onClick={() => setActiveSection("contact")}
               className="flex-shrink-0"
@@ -81,6 +75,7 @@ export function Graduates() {
         {activeSection === "testimonials" && <Testimonials />}
         {activeSection === "achievements" && <Achievements />}
         {activeSection === "contact" && <ContactForm />}
+        {activeSection === "jobs" && <JobBoard />}
       </div>
     </div>
   )

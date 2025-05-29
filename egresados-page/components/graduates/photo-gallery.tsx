@@ -6,62 +6,63 @@ import { Dialog, DialogContent } from "@/components/ui/dialog"
 import { Card, CardContent } from "@/components/ui/card"
 import { X } from "lucide-react"
 
+// Datos de ejemplo para la galería con imágenes actualizadas
 const galleryItems = [
   {
     id: 1,
-    name: "Alejandro Martínez",
-    year: "2020",
-    career: "Ingeniería en Sistemas",
-    image: "/images/egresados/alejandro_martinez.jpg",
-  },
-  {
-    id: 2,
-    name: "Alexis Sosa",
-    year: "2021",
-    career: "Ingeniería en TIC",
-    image: "/images/egresados/alexis_sosa.jpg",
-  },
-  {
-    id: 3,
-    name: "Alonso Cabrera",
-    year: "2019",
-    career: "Ingeniería Industrial",
-    image: "/images/egresados/alonso_cabrera.jpg",
-  },
-  {
-    id: 4,
     name: "Ana Martínez",
     year: "2020",
     career: "Ingeniería Informática",
-    image: "/images/egresados/ana_martinez.jpg",
+    image: "/ana_martinez.jpg",
   },
   {
-    id: 5,
-    name: "Angie Cruz",
-    year: "2022",
-    career: "Arquitectura",
-    image: "/images/egresados/angie_cruz.jpg",
-  },
-  {
-    id: 6,
+    id: 2,
     name: "Carlos Rodríguez",
     year: "2019",
     career: "Administración de Empresas",
-    image: "/images/egresados/carlos_rodriguez.jpg",
+    image: "/carlos_rodriguez.jpg",
+  },
+  {
+    id: 3,
+    name: "Laura Sánchez",
+    year: "2021",
+    career: "Arquitectura",
+    image: "/alexis_sosa.jpg",
+  },
+  {
+    id: 4,
+    name: "Miguel Fernández",
+    year: "2018",
+    career: "Medicina",
+    image: "/alonso_cabrera.jpg",
+  },
+  {
+    id: 5,
+    name: "Sofía López",
+    year: "2022",
+    career: "Derecho",
+    image: "/angie_cruz.jpg",
+  },
+  {
+    id: 6,
+    name: "Javier Gómez",
+    year: "2020",
+    career: "Psicología",
+    image: "/elena_torres.jpg",
   },
   {
     id: 7,
     name: "Elena Torres",
     year: "2021",
     career: "Diseño Gráfico",
-    image: "/images/egresados/elena_torres.jpg",
+    image: "/guillermo_chavez.jpg",
   },
   {
     id: 8,
-    name: "Guillermo Chávez",
-    year: "2020",
-    career: "Psicología",
-    image: "/images/egresados/guillermo_chavez.jpg",
+    name: "Pablo Díaz",
+    year: "2019",
+    career: "Economía",
+    image: "/alejandro_martinez.jpg",
   },
 ]
 
@@ -83,7 +84,8 @@ export function PhotoGallery() {
       <div className="text-center">
         <h2 className="text-3xl font-bold mb-4">Galería de Egresados</h2>
         <p className="text-gray-600 max-w-3xl mx-auto">
-          Conoce a algunos de nuestros egresados destacados que han pasado por nuestra institución y ahora son profesionales exitosos en sus campos.
+          Conoce a algunos de nuestros egresados destacados que han pasado por nuestra institución y ahora son
+          profesionales exitosos en sus campos.
         </p>
       </div>
 

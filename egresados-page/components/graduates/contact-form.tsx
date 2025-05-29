@@ -10,16 +10,28 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { toast } from "@/components/ui/use-toast"
-import { CheckCircle2, Loader2 } from "lucide-react"
+import { CheckCircle2, Loader2, AlertCircle } from "lucide-react"
 
 // Esquema de validación del formulario
 const formSchema = z.object({
   name: z.string().min(2, {
     message: "El nombre debe tener al menos 2 caracteres.",
   }),
-  email: z.string().email({
-    message: "Por favor, introduce un email válido.",
-  }),
+  email: z
+    .string()
+    .email({
+      message: "Por favor, introduce un email válido.",
+    })
+    .refine(
+      (email) => {
+        // Validación adicional: verificar si el correo termina con un dominio específico
+        const validDomains = ["@gmail.com", "@hotmail.com", "@outlook.com", "@yahoo.com", "@institucion.edu"]
+        return validDomains.some((domain) => email.endsWith(domain))
+      },
+      {
+        message: "El correo no es válido. Utiliza un correo con dominio conocido o institucional.",
+      },
+    ),
   graduationYear: z.string().min(4, {
     message: "Por favor, selecciona tu año de graduación.",
   }),
@@ -52,9 +64,23 @@ export function ContactForm() {
   function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true)
 
-    // Simulación de envío del formulario
+    // Simulación de envío del formulario y validación adicional del correo
     setTimeout(() => {
       console.log(values)
+
+      // Verificación adicional del correo (simulada)
+      const isValidEmail = values.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)
+
+      if (!isValidEmail) {
+        setIsSubmitting(false)
+        toast({
+          title: "Error de validación",
+          description: "El formato del correo electrónico no es válido. Por favor, verifica e intenta nuevamente.",
+          variant: "destructive",
+        })
+        return
+      }
+
       setIsSubmitting(false)
       setIsSuccess(true)
 
@@ -115,9 +141,25 @@ export function ContactForm() {
                     <FormItem>
                       <FormLabel>Correo electrónico</FormLabel>
                       <FormControl>
-                        <Input placeholder="tu@email.com" {...field} />
+                        <div className="relative">
+                          <Input
+                            placeholder="tu@email.com"
+                            {...field}
+                            className={form.formState.errors.email ? "border-red-300 pr-10" : ""}
+                          />
+                          {form.formState.errors.email && (
+                            <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                              <AlertCircle className="h-5 w-5 text-red-500" />
+                            </div>
+                          )}
+                        </div>
                       </FormControl>
                       <FormMessage />
+                      {!form.formState.errors.email && (
+                        <p className="text-xs text-muted-foreground">
+                          Utiliza un correo con dominio conocido (gmail.com, hotmail.com, outlook.com) o institucional.
+                        </p>
+                      )}
                     </FormItem>
                   )}
                 />
