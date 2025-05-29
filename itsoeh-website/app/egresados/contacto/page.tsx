@@ -1,3 +1,5 @@
+'use client';
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -47,79 +49,121 @@ export default function ContactoPage() {
                   </TabsList>
 
                   <TabsContent value="mensaje" className="mt-0">
-                    <form className="space-y-6">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                          <Label htmlFor="nombre" className="text-sm font-medium">
-                            Nombre completo
-                          </Label>
-                          <Input id="nombre" placeholder="Tu nombre completo" />
-                        </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="email" className="text-sm font-medium">
-                            Correo electrónico
-                          </Label>
-                          <Input id="email" type="email" placeholder="tu@email.com" />
-                        </div>
-                      </div>
+  <form className="space-y-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="space-y-2">
+        <Label htmlFor="nombre" className="text-sm font-medium">
+          Nombre completo
+        </Label>
+        <Input
+          id="nombre"
+          name="nombre"
+          type="text"
+          placeholder="Tu nombre completo"
+          required
+          maxLength={50}
+          pattern="^[A-Za-zÁÉÍÓÚÜáéíóúüÑñ ]+$"
+          title="Solo letras y espacios. No se permiten números ni caracteres especiales."
+          onInput={(e) => {
+            const input = e.target as HTMLInputElement;
+            input.value = input.value.replace(/[^A-Za-zÁÉÍÓÚÜáéíóúüÑñ ]/g, '');
+          }}
+        />
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                          <Label htmlFor="telefono" className="text-sm font-medium">
-                            Teléfono
-                          </Label>
-                          <Input id="telefono" placeholder="Tu número telefónico" />
-                        </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="generacion" className="text-sm font-medium">
-                            Generación
-                          </Label>
-                          <Select>
-                            <SelectTrigger id="generacion">
-                              <SelectValue placeholder="Selecciona tu generación" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="2020-2024">2020-2024</SelectItem>
-                              <SelectItem value="2019-2023">2019-2023</SelectItem>
-                              <SelectItem value="2018-2022">2018-2022</SelectItem>
-                              <SelectItem value="2017-2021">2017-2021</SelectItem>
-                              <SelectItem value="anterior">Anterior</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
-                      </div>
+      </div>
+      <div className="space-y-2">
+          <Label htmlFor="email" className="text-sm font-medium">
+            Correo electrónico
+          </Label>
+          <Input
+              id="email"
+              name="email"
+              type="text"
+              placeholder="tu@email.com"
+              required
+              pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$"
+              title="Ingresa un correo (ej. ejemplo@correo.com)"
+            />
+        </div>
 
+      </div>
 
-                      <div className="space-y-2">
-                        <Label htmlFor="asunto" className="text-sm font-medium">
-                          Asunto
-                        </Label>
-                        <Select>
-                          <SelectTrigger id="asunto">
-                            <SelectValue placeholder="Selecciona un asunto" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="bolsa-trabajo">Bolsa de trabajo</SelectItem>
-                            <SelectItem value="educacion-continua">Educación continua</SelectItem>
-                            <SelectItem value="tramites">Trámites y documentos</SelectItem>
-                            <SelectItem value="eventos">Eventos para egresados</SelectItem>
-                            <SelectItem value="otro">Otro</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="space-y-2">
+        <Label htmlFor="telefono" className="text-sm font-medium">
+          Teléfono
+        </Label>
+        <Input
+          id="telefono"
+          name="telefono"
+          type="tel"
+          inputMode="numeric"
+          pattern="^\d{10}$"
+          maxLength={10}
+          placeholder="Tu número telefónico"
+          title="El número debe tener exactamente 10 dígitos"
+          required
+          onInput={(e) => {
+            const input = e.target as HTMLInputElement;
+            input.value = input.value.replace(/[^0-9]/g, '');
+          }}
+        />
+      </div>
+      <div className="space-y-2">
+        <Label htmlFor="generacion" className="text-sm font-medium">
+          Generación
+        </Label>
+        <Select>
+          <SelectTrigger id="generacion">
+            <SelectValue placeholder="Selecciona tu generación" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="2020-2024">2020-2024</SelectItem>
+            <SelectItem value="2019-2023">2019-2023</SelectItem>
+            <SelectItem value="2018-2022">2018-2022</SelectItem>
+            <SelectItem value="2017-2021">2017-2021</SelectItem>
+            <SelectItem value="anterior">Anterior</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+    </div>
 
-                      <div className="space-y-2">
-                        <Label htmlFor="mensaje" className="text-sm font-medium">
-                          Mensaje
-                        </Label>
-                        <Textarea id="mensaje" placeholder="Escribe tu mensaje aquí..." rows={5} />
-                      </div>
+    <div className="space-y-2">
+      <Label htmlFor="asunto" className="text-sm font-medium">
+        Asunto
+      </Label>
+      <Select>
+        <SelectTrigger id="asunto">
+          <SelectValue placeholder="Selecciona un asunto" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="bolsa-trabajo">Bolsa de trabajo</SelectItem>
+          <SelectItem value="educacion-continua">Educación continua</SelectItem>
+          <SelectItem value="tramites">Trámites y documentos</SelectItem>
+          <SelectItem value="eventos">Eventos para egresados</SelectItem>
+          <SelectItem value="otro">Otro</SelectItem>
+        </SelectContent>
+      </Select>
+    </div>
 
-                      <Button type="submit" className="w-full" size="lg">
-                        Enviar mensaje
-                      </Button>
-                    </form>
-                  </TabsContent>  
+    <div className="space-y-2">
+      <Label htmlFor="mensaje" className="text-sm font-medium">
+        Mensaje
+      </Label>
+      <Textarea
+        id="mensaje"
+        name="mensaje"
+        placeholder="Escribe tu mensaje aquí..."
+        rows={5}
+      />
+    </div>
+
+    <Button type="submit" className="w-full" size="lg">
+      Enviar mensaje
+    </Button>
+  </form>
+</TabsContent>
+
                 </Tabs>
               </CardContent>
             </Card>
@@ -142,7 +186,7 @@ export default function ContactoPage() {
                     <PhoneIcon className="h-5 w-5 mt-0.5 text-primary" />
                     <div>
                       <p className="font-medium">Teléfono</p>
-                      <p className="text-muted-foreground">(738) 123-4567 Ext. 123</p>
+                      <p className="text-muted-foreground">01 (738) 73 54000</p>
                     </div>
                   </div>
 
@@ -150,7 +194,7 @@ export default function ContactoPage() {
                     <MailIcon className="h-5 w-5 mt-0.5 text-primary" />
                     <div>
                       <p className="font-medium">Correo electrónico</p>
-                      <p className="text-muted-foreground">egresados@itsoeh.edu.mx</p>
+                      <p className="text-muted-foreground">itsoeh@itsoeh.edu.mx</p>
                     </div>
                   </div>
 
@@ -173,7 +217,7 @@ export default function ContactoPage() {
                     <div>
                       <h3 className="font-medium">Horario de atención</h3>
                       <p className="text-muted-foreground">Lunes a Viernes</p>
-                      <p className="text-muted-foreground">9:00 a.m. - 5:00 p.m.</p>
+                      <p className="text-muted-foreground">9:00 a.m. - 4:00 p.m.</p>
                     </div>
                   </div>
                 </div>
@@ -192,7 +236,7 @@ export default function ContactoPage() {
                 <div className="h-[250px] w-full bg-muted relative overflow-hidden">
                   <iframe
                     title="Ubicación ITSOEH"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3761.251405707109!2d-99.2204159!3d20.2266915!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d24e1a38c7e5cf%3A0x27b82a14a76f8e9!2sITSOEH!5e0!3m2!1ses-419!2smx!4v1683062120410!5m2!1ses-419!2smx"
+                    src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3744.298894124869!2d-99.22328502499194!3d20.204896981246193!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjDCsDEyJzE3LjYiTiA5OcKwMTMnMTQuNiJX!5e0!3m2!1ses!2smx!4v1748467007197!5m2!1ses!2smx"
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}

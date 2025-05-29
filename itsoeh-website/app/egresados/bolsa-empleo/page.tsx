@@ -25,6 +25,7 @@ import {
 } from "@/components/ui/dialog"
 import { Label } from "@/components/ui/label"
 
+
 interface JobOffer {
   id: number
   title: string
@@ -44,206 +45,198 @@ interface JobOffer {
 
 const jobOffers: JobOffer[] = [
   {
-    id: 1,
-    title: "Ingeniero de Software",
-    company: "Tecnología Innovadora S.A.",
-    logo: "/placeholder.svg?height=80&width=80",
-    location: "Pachuca, Hidalgo",
-    type: "Tiempo completo",
-    date: "15 de mayo, 2025",
-    description:
-      "Buscamos ingenieros de software con experiencia en desarrollo web y aplicaciones móviles. Conocimientos en React, Node.js y bases de datos.",
-    requirements: [
-      "Licenciatura en Ingeniería en Sistemas o afín",
-      "2+ años de experiencia",
-      "Conocimientos en React y Node.js",
-    ],
-    benefits: ["Salario competitivo", "Horario flexible", "Oportunidad de crecimiento", "Home office parcial"],
-    exclusive: true,
-    featured: true,
-    salary: "$20,000 - $30,000 MXN mensuales",
-    url: "https://empresa.com/empleo/ingeniero-software"
-  },
-  {
-    id: 2,
-    title: "Diseñador UX/UI",
-    company: "Creativa Studio",
-    logo: "/placeholder.svg?height=80&width=80",
-    location: "Guadalajara, Jalisco",
-    type: "Medio tiempo",
-    date: "18 de mayo, 2025",
-    description: "Diseña experiencias de usuario intuitivas y visualmente atractivas para productos digitales.",
-    requirements: ["Figma", "Adobe XD", "Experiencia en diseño web"],
-    benefits: ["Horario flexible", "Ambiente creativo"],
-    exclusive: false,
-    featured: true,
-    salary: "$12,000 - $18,000 MXN mensuales",
-    url: "https://creativa.com/empleo/disenador-ux-ui"
-  },
-  {
-    id: 3,
-    title: "Analista de Datos",
-    company: "DataCorp",
-    logo: "/placeholder.svg?height=80&width=80",
-    location: "Monterrey, Nuevo León",
-    type: "Tiempo completo",
-    date: "17 de mayo, 2025",
-    description: "Analiza datos para apoyar decisiones estratégicas del negocio.",
-    requirements: ["SQL", "Excel", "Power BI"],
-    benefits: ["Prestaciones superiores", "Trabajo híbrido"],
-    exclusive: true,
-    featured: false,
-    salary: "$22,000 - $28,000 MXN mensuales",
-    url: "https://datacorp.mx/empleo/analista-datos"
-  },
-  {
-    id: 4,
-    title: "Soporte Técnico",
-    company: "Soluciones TI",
-    logo: "/placeholder.svg?height=80&width=80",
-    location: "Toluca, Estado de México",
-    type: "Tiempo completo",
-    date: "16 de mayo, 2025",
-    description: "Brinda soporte técnico a usuarios internos y externos.",
-    requirements: ["Conocimiento en redes", "Atención a clientes", "Diagnóstico de hardware"],
-    benefits: ["Capacitación constante", "Bono por desempeño"],
-    exclusive: false,
-    featured: true,
-    salary: "$10,000 - $14,000 MXN mensuales",
-    url: "https://solucionesti.mx/empleo/soporte-tecnico"
-  },
-  {
-    id: 5,
-    title: "Administrador de Sistemas",
-    company: "Infraestructura IT",
-    logo: "/placeholder.svg?height=80&width=80",
-    location: "Querétaro, Querétaro",
-    type: "Tiempo completo",
-    date: "19 de mayo, 2025",
-    description: "Gestiona y mantiene servidores y redes internas.",
-    requirements: ["Linux", "Windows Server", "Virtualización"],
-    benefits: ["Seguro de vida", "Plan de carrera"],
-    exclusive: true,
-    featured: false,
-    salary: "$25,000 - $32,000 MXN mensuales",
-    url: "https://infraestruc.com/empleo/admin-sistemas"
-  },
-  {
-    id: 6,
-    title: "Desarrollador Backend",
-    company: "DevSolutions",
-    logo: "/placeholder.svg?height=80&width=80",
-    location: "CDMX",
-    type: "Proyecto",
-    date: "19 de mayo, 2025",
-    description: "Desarrolla microservicios y APIs escalables usando Node.js.",
-    requirements: ["Node.js", "MongoDB", "Docker"],
-    benefits: ["Trabajo remoto", "Pago por proyecto"],
-    exclusive: false,
-    featured: true,
-    salary: "$20,000 MXN por proyecto",
-    url: "https://devsolutions.dev/empleo/backend-node"
-  },
-  {
-    id: 7,
-    title: "Community Manager",
-    company: "Agencia Viral",
-    logo: "/placeholder.svg?height=80&width=80",
-    location: "León, Guanajuato",
-    type: "Medio tiempo",
-    date: "14 de mayo, 2025",
-    description: "Gestión de redes sociales y campañas digitales.",
-    requirements: ["Redacción", "Canva", "Estrategia de contenido"],
-    benefits: ["Trabajo desde casa", "Bonos de rendimiento"],
-    exclusive: false,
-    featured: false,
-    salary: "$8,000 - $12,000 MXN mensuales",
-    url: "https://viral.agency/empleo/community"
-  },
-  {
-    id: 8,
-    title: "Tester QA",
-    company: "ControlSoft",
-    logo: "/placeholder.svg?height=80&width=80",
-    location: "San Luis Potosí",
-    type: "Tiempo completo",
-    date: "15 de mayo, 2025",
-    description: "Realiza pruebas funcionales y reporta errores en software en desarrollo.",
-    requirements: ["Pruebas manuales", "Metodologías ágiles", "JIRA"],
-    benefits: ["Prestaciones de ley", "Home office parcial"],
-    exclusive: false,
-    featured: true,
-    salary: "$18,000 - $24,000 MXN mensuales",
-    url: "https://controlsoft.io/empleo/tester-qa"
-  },
-  {
-    id: 9,
-    title: "Project Manager Jr.",
-    company: "PM Group",
-    logo: "/placeholder.svg?height=80&width=80",
-    location: "CDMX",
-    type: "Prácticas",
-    date: "13 de mayo, 2025",
-    description: "Apoyo en gestión de proyectos tecnológicos.",
-    requirements: ["Organización", "Comunicación", "Office"],
-    benefits: ["Constancia de prácticas", "Oportunidad de contratación"],
-    exclusive: true,
-    featured: false,
-    salary: "$5,000 MXN mensuales",
-    url: "https://pmgroup.mx/empleo/pm-jr"
-  },
-  {
-    id: 10,
-    title: "Ingeniero DevOps",
-    company: "CloudOps",
-    logo: "/placeholder.svg?height=80&width=80",
-    location: "Remoto",
-    type: "Tiempo completo",
-    date: "18 de mayo, 2025",
-    description: "Automatiza despliegues y mejora procesos de CI/CD.",
-    requirements: ["GitHub Actions", "Docker", "AWS"],
-    benefits: ["Trabajo 100% remoto", "Salario competitivo"],
-    exclusive: true,
-    featured: true,
-    salary: "$30,000 - $38,000 MXN mensuales",
-    url: "https://cloudops.dev/empleo/devops"
-  },
-  {
-    id: 11,
-    title: "Desarrollador Full Stack",
-    company: "FullTech MX",
-    logo: "/placeholder.svg?height=80&width=80",
-    location: "Aguascalientes",
-    type: "Tiempo completo",
-    date: "19 de mayo, 2025",
-    description: "Participa en el desarrollo de plataformas web de principio a fin.",
-    requirements: ["React", "Node.js", "MySQL"],
-    benefits: ["Sueldo competitivo", "Prestaciones de ley", "Clases de inglés"],
-    exclusive: false,
-    featured: true,
-    salary: "$25,000 - $35,000 MXN mensuales",
-    url: "https://fulltechmx.com/empleo/fullstack"
-  }
+  id: 1,
+  title: "Ingeniero de Software",
+  company: "Tecnología Innovadora S.A.",
+  logo: "/placeholder.svg?height=80&width=80",
+  location: "Pachuca, Hidalgo",
+  type: "Tiempo completo",
+  date: "15 de mayo, 2025",
+  description:
+    "Desarrolla soluciones digitales innovadoras utilizando tecnologías modernas como React y Node.js. Participarás en proyectos web y móviles, trabajando en un entorno ágil con enfoque en la calidad del código, pruebas automatizadas y despliegues continuos.",
+  requirements: [
+    "Licenciatura en Ingeniería en Sistemas o afín",
+    "2+ años de experiencia desarrollando aplicaciones web y móviles",
+    "Dominio de React, Node.js y bases de datos relacionales/noSQL",
+    "Familiaridad con control de versiones (Git) y metodologías ágiles"
+  ],
+  benefits: [
+    "Salario competitivo",
+    "Horario flexible",
+    "Oportunidad de crecimiento profesional y liderazgo técnico",
+    "Home office parcial",
+    "Capacitación en tecnologías emergentes"
+  ],
+  exclusive: true,
+  featured: true,
+  salary: "$20,000 - $30,000 MXN mensuales",
+  url: "https://empresa.com/empleo/ingeniero-software"
+},
+{
+  id: 2,
+  title: "Diseñador UX/UI",
+  company: "Creativos Digitales",
+  logo: "/placeholder.svg?height=80&width=80",
+  location: "CDMX",
+  type: "Tiempo completo",
+  date: "10 de mayo, 2025",
+  description:
+    "Responsable del diseño de interfaces centradas en el usuario para productos digitales. Colaborarás estrechamente con equipos de desarrollo y producto, desde la ideación hasta la implementación, aplicando principios de diseño accesible y responsivo.",
+  requirements: [
+    "Experiencia comprobable en diseño de interfaces web y móviles",
+    "Dominio de herramientas como Figma, Sketch o Adobe XD",
+    "Conocimiento en principios de UX, diseño accesible y patrones de UI",
+    "Capacidad de trabajo colaborativo con desarrolladores y PMs"
+  ],
+  benefits: [
+    "Prestaciones de ley",
+    "Trabajo remoto disponible",
+    "Clases de inglés subvencionadas",
+    "Participación en proyectos creativos de alto impacto"
+  ],
+  exclusive: false,
+  featured: false,
+  salary: "$18,000 MXN mensuales",
+  url: "https://empresa.com/empleo/disenador-ui"
+},
+{
+  id: 3,
+  title: "Desarrollador Backend",
+  company: "Soluciones Cloud",
+  logo: "/placeholder.svg?height=80&width=80",
+  location: "Guadalajara, Jalisco",
+  type: "Tiempo completo",
+  date: "8 de mayo, 2025",
+  description:
+    "Encargado de crear APIs eficientes y seguras, integraciones con servicios en la nube y bases de datos. Trabajarás con herramientas modernas como Docker y Git, asegurando escalabilidad y rendimiento del backend.",
+  requirements: [
+    "3+ años de experiencia como desarrollador backend",
+    "Conocimientos sólidos en Node.js, Express, MongoDB y Docker",
+    "Familiaridad con servicios cloud como AWS o GCP",
+    "Experiencia en Git, pruebas unitarias y metodologías ágiles"
+  ],
+  benefits: [
+    "Sueldo competitivo",
+    "Home office parcial o total",
+    "Bonos trimestrales por desempeño",
+    "Acceso a certificaciones en tecnologías cloud"
+  ],
+  exclusive: true,
+  featured: true,
+  salary: "$25,000 MXN mensuales",
+  url: "https://empresa.com/empleo/backend"
+},
+{
+  id: 4,
+  title: "Analista de Datos",
+  company: "Data Insights",
+  logo: "/placeholder.svg?height=80&width=80",
+  location: "Remoto",
+  type: "Medio tiempo",
+  date: "6 de mayo, 2025",
+  description:
+    "Analiza y visualiza grandes volúmenes de datos para generar insights accionables. Apoyarás en la creación de dashboards, limpieza de datos y reportes automatizados para áreas clave del negocio.",
+  requirements: [
+    "Licenciatura en Estadística, Matemáticas, Ingeniería o afín",
+    "Dominio de SQL, Power BI y conocimientos intermedios de Python",
+    "Capacidad analítica para interpretar resultados y generar recomendaciones",
+    "Nivel de inglés intermedio para lectura técnica"
+  ],
+  benefits: [
+    "Trabajo 100% remoto",
+    "Horario flexible adaptado a estudiantes o freelance",
+    "Participación en proyectos de alto impacto",
+    "Capacitación continua en herramientas de análisis"
+  ],
+  exclusive: false,
+  featured: false,
+  salary: "$15,000 MXN mensuales",
+  url: "https://empresa.com/empleo/analista-datos"
+},
+{
+  id: 5,
+  title: "Soporte Técnico",
+  company: "Infraestructura IT",
+  logo: "/placeholder.svg?height=80&width=80",
+  location: "Querétaro",
+  type: "Tiempo completo",
+  date: "4 de mayo, 2025",
+  description:
+    "Brinda atención técnica a usuarios finales, resolución de incidencias, instalación de software y mantenimiento de equipos informáticos. Serás parte clave del equipo de infraestructura local.",
+  requirements: [
+    "Conocimientos básicos de redes y hardware",
+    "Experiencia en soporte a usuarios (presencial o remoto)",
+    "Buenas habilidades de comunicación y atención al cliente",
+    "Disponibilidad de horario rotativo"
+  ],
+  benefits: [
+    "Capacitación constante en nuevas tecnologías",
+    "Prestaciones superiores a la ley (vales, seguro, vacaciones)",
+    "Buen ambiente laboral",
+    "Oportunidad de crecimiento en el área de TI"
+  ],
+  exclusive: false,
+  featured: false,
+  salary: "$12,000 MXN mensuales",
+  url: "https://empresa.com/empleo/soporte"
+},
+{
+  id: 6,
+  title: "Marketing Digital",
+  company: "Agencia Creativa MX",
+  logo: "/placeholder.svg?height=80&width=80",
+  location: "CDMX",
+  type: "Tiempo completo",
+  date: "2 de mayo, 2025",
+  description:
+    "Desarrolla y ejecuta campañas de marketing digital en redes sociales y Google Ads. Analiza métricas, propone mejoras y mantiene actualizadas las estrategias de contenido y posicionamiento SEO/SEM.",
+  requirements: [
+    "Experiencia mínima de 2 años en marketing digital",
+    "Manejo avanzado de herramientas como Facebook Ads y Google Ads",
+    "Conocimientos de SEO/SEM, Google Analytics y redacción persuasiva",
+    "Alta creatividad y capacidad de análisis de resultados"
+  ],
+  benefits: [
+    "Bonos por desempeño mensual",
+    "Clases de marketing digital y certificaciones",
+    "Home office parcial con horarios híbridos",
+    "Ambiente dinámico y creativo"
+  ],
+  exclusive: false,
+  featured: true,
+  salary: "$17,000 MXN mensuales",
+  url: "https://empresa.com/empleo/marketing"
+}
+
+  
 ]
+  
+
 
 export default function BolsaEmpleoPage() {
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedType, setSelectedType] = useState("all")
   const [onlyExclusive, setOnlyExclusive] = useState(false)
   const [cvDialogOpen, setCvDialogOpen] = useState(false)
+  const [openRequirementsId, setOpenRequirementsId] = useState<number | null>(null)
 
-  const filteredJobs = jobOffers.filter((job) => {
-    const matchesSearch =
-      searchTerm === "" ||
-      job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      job.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      job.description.toLowerCase().includes(searchTerm.toLowerCase())
+ const normalizeText = (text: string) =>
+  text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
 
-    const matchesType = selectedType === "all" || job.type.includes(selectedType)
-    const matchesExclusive = !onlyExclusive || job.exclusive
+const normalizedSearchTerm = normalizeText(searchTerm)
 
-    return matchesSearch && matchesType && matchesExclusive
-  })
+const filteredJobs = jobOffers.filter((job) => {
+  const matchesSearch =
+    normalizedSearchTerm === "" ||
+    normalizeText(job.title).includes(normalizedSearchTerm) ||
+    normalizeText(job.company).includes(normalizedSearchTerm) ||
+    normalizeText(job.description).includes(normalizedSearchTerm)
+
+  const matchesType = selectedType === "all" || job.type.includes(selectedType)
+  const matchesExclusive = !onlyExclusive || job.exclusive
+
+  return matchesSearch && matchesType && matchesExclusive
+})
 
   return (
     <div className="bg-gradient-to-b from-primary/5 to-background min-h-screen">
@@ -300,33 +293,6 @@ export default function BolsaEmpleoPage() {
             <div className="text-sm text-muted-foreground">
               Mostrando {filteredJobs.length} de {jobOffers.length} ofertas disponibles
             </div>
-            {/* Dialog para registrar CV */}
-            <Dialog open={cvDialogOpen} onOpenChange={setCvDialogOpen}>
-              <DialogTrigger asChild>
-                <Button size="sm" className="gap-2">
-                  <BookmarkIcon className="h-4 w-4" /> Registrar mi CV
-                </Button>
-              </DialogTrigger>
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>Registrar mi CV</DialogTitle>
-                  <DialogDescription>
-                    Sube tu currículum para que las empresas puedan encontrarte.
-                  </DialogDescription>
-                </DialogHeader>
-                <div className="space-y-4">
-                  <Label>Nombre completo</Label>
-                  <Input placeholder="Ingresa tu nombre" />
-                  <Label>Correo electrónico</Label>
-                  <Input type="email" placeholder="tucorreo@ejemplo.com" />
-                  <Label>Sube tu CV (PDF)</Label>
-                  <Input type="file" accept=".pdf" />
-                </div>
-                <DialogFooter>
-                  <Button onClick={() => setCvDialogOpen(false)}>Enviar</Button>
-                </DialogFooter>
-              </DialogContent>
-            </Dialog>
           </div>
         </section>
 
@@ -340,8 +306,43 @@ export default function BolsaEmpleoPage() {
               <CardContent>
                 <p>{job.description}</p>
                 <p className="text-sm text-muted-foreground mt-2">{job.location}</p>
+               {openRequirementsId === job.id && (
+  <div className="mt-4 space-y-4 text-sm text-muted-foreground">
+    <div>
+      <h4 className="font-semibold mb-1">Requisitos:</h4>
+      <ul className="list-disc pl-5">
+        {job.requirements.map((req, index) => (
+          <li key={index}>{req}</li>
+        ))}
+      </ul>
+    </div>
+    <div>
+      <h4 className="font-semibold mb-1">Beneficios:</h4>
+      <ul className="list-disc pl-5">
+        {job.benefits.map((benefit, index) => (
+          <li key={index}>{benefit}</li>
+        ))}
+      </ul>
+    </div>
+    <div>
+      <h4 className="font-semibold mb-1">Salario:</h4>
+      <p>{job.salary}</p>
+    </div>
+  
+  </div>
+)}
+
               </CardContent>
-              <CardFooter className="justify-end gap-2">
+              <CardFooter className="justify-between">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() =>
+                    setOpenRequirementsId(openRequirementsId === job.id ? null : job.id)
+                  }
+                >
+                  {openRequirementsId === job.id ? "Ocultar requisitos" : "Ver requisitos"}
+                </Button>
                 <a href={job.url} target="_blank" rel="noopener noreferrer">
                   <Button className="gap-1">
                     <BriefcaseIcon className="h-4 w-4" /> Aplicar ahora
@@ -355,11 +356,16 @@ export default function BolsaEmpleoPage() {
             <div className="text-center py-12 text-muted-foreground">
               <SearchIcon className="h-8 w-8 mx-auto mb-4" />
               No se encontraron ofertas con esos criterios.
-              <Button onClick={() => {
-                setSearchTerm("")
-                setSelectedType("all")
-                setOnlyExclusive(false)
-              }} className="mt-4">Limpiar filtros</Button>
+              <Button
+                onClick={() => {
+                  setSearchTerm("")
+                  setSelectedType("all")
+                  setOnlyExclusive(false)
+                }}
+                className="mt-4"
+              >
+                Limpiar filtros
+              </Button>
             </div>
           )}
         </div>
